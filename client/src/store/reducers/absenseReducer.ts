@@ -2,10 +2,10 @@ import * as actionTypes from "./../actions/actionTypes"
 
 const initialState: AbsenceListState = {
     allAbsences: [],
-    visibleRows: [],
     page: 1,
     pageSize: 10,
-    loading: true
+    loading: true,
+    totalRecords: 0
 }
 
 const absenceReducer = (
@@ -13,13 +13,31 @@ const absenceReducer = (
     action: storeAction
 ): AbsenceListState => {
     switch (action.type) {
-        case actionTypes.ADD_ARTICLE:
+        case actionTypes.REQUEST_DATA:
             return {
                 ...state,
+                loading: true
             }
-        case actionTypes.REMOVE_ARTICLE:
+        case actionTypes.RECEIVE_DATA:
+            const absenceData = action.payload.results.map((row:any) => { return { ...row, filterOut: false } })
             return {
                 ...state,
+                loading: false,
+                allAbsences: absenceData
+            }
+        case actionTypes.CLEAR_FILTERS:
+            const resetFilter = state.allAbsences.map(row => { return { ...row, filterOut: false } })
+            return {
+                ...state,
+                loading: false,
+                allAbsences: resetFilter
+            }
+        case actionTypes.APPLY_FILTER:
+            const filteredData = state.allAbsences.map(row => { return { ...row, filterOut: false } })
+            return {
+                ...state,
+                loading: false,
+                allAbsences: filteredData
             }
     }
     return state

@@ -20,12 +20,14 @@ interface IAbsences {
     startDate:string,
     type:string,
     userId:number,
-    memberDetails:IMemberDetail
+    memberDetails:IMemberDetail,
+    status:string,
+    filterOut:boolean
   }
   
   type AbsenceListState = {
     allAbsences: IAbsences[],
-    visibleRows :IAbsences[],
+    totalRecords:number
     page:number,
     pageSize:number,
     loading:boolean
@@ -38,3 +40,9 @@ interface IAbsences {
   }
   
   type DispatchType = (args: storeAction) => storeAction
+
+  type RootState = {
+    absenceState:AbsenceListState
+  }
+
+  type AppDispatch = typeof store.dispatch

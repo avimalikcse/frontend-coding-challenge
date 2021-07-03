@@ -1,7 +1,13 @@
+import APIWrapper from '../../utils/APIWrapper'
 import * as actionTypes from './actionTypes'
 
-export function simulateHttpRequest(action:storeAction) {
-    return (dispatch: DispatchType) => {
-        dispatch(action)
+const API = new APIWrapper()
+
+export function requestAbsenceDataFromServer() {
+    return async (dispatch: DispatchType) => {
+        dispatch({type:actionTypes.REQUEST_DATA})
+        const data= await API.get('http://localhost:5000/api/get-absences-list')
+        dispatch({type:actionTypes.RECEIVE_DATA,payload:{results:data.data}})
+
     }
   }

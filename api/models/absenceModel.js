@@ -9,7 +9,19 @@ export const getAbsenceDetails = async(offset = 0, limit = 10) => {
         memberMap[member.userId] = member
     });
     const sortedData = absenceData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    const slicedPart = sortedData.map(user => { return {...user, memberDetails: memberMap[user.userId] } })
+    const slicedPart = sortedData.map(user => {
+        let status = 'Requested'
+        if (user.confirmedAt) {
+            status = 'Confirmed'
+        }
+        if (user.rejectedAt) {
+            status = 'Rejected'
+        }
+        return {...user,
+            memberDetails: memberMap[user.userId],
+            status
+        }
+    })
     return {
         totalCount: sortedData.length,
         data: slicedPart
