@@ -7,6 +7,7 @@ import store from './store/configureStore'
 function App() {
   return (
     <Provider store={store}>
+    {/* Main Layout File */}
     <Layout></Layout>
     </Provider>
   );

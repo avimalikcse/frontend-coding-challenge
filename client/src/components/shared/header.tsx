@@ -2,28 +2,21 @@ import React from "react";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import useStyles from "./../styles/style";
 import clsx from "clsx";
 
 interface siteHeaerProps {
-    drawerOpen:boolean,
-    handleDrawerOpen:()=>void
+  drawerOpen: boolean;
+  handleDrawerOpen: () => void;
 }
-const SiteHeader = (props:siteHeaerProps) => {
-  const styleClasses = useStyles() 
-  const open = props.drawerOpen
+const SiteHeader = (props: siteHeaerProps) => {
+  const styleClasses = useStyles();
+  const open = props.drawerOpen;
   return (
     <AppBar
       position="absolute"

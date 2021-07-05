@@ -6,6 +6,15 @@ interface IMemberDetail {
     userId:number
 }
 
+interface IFilterSet {
+
+  type:string,
+  value:any,
+  priority:number,
+  objectPath:string,
+
+}
+
 interface IAbsences {
     admitterId: number
     admitterNote: string
@@ -25,12 +34,16 @@ interface IAbsences {
     filterOut:boolean
   }
   
+
+
   type AbsenceListState = {
     allAbsences: IAbsences[],
+    rawAbsences:IAbsences[],
     totalRecords:number
     page:number,
     pageSize:number,
-    loading:boolean
+    loading:boolean,
+    filterSet:IFilterSet[]
   }
   
 
@@ -46,3 +59,9 @@ interface IAbsences {
   }
 
   type AppDispatch = typeof store.dispatch
+
+  declare global {
+    interface Window {
+      __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+  }
